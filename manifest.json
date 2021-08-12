@@ -1,6 +1,6 @@
 {
 	"id": "obsidian-code-copy",
-	"name": "Code Copier",
+	"name": "Code Copy",
 	"version": "1.0.0",
 	"minAppVersion": "0.9.12",
 	"description": "Easily copy the contents of code blocks in Obsidian.",
