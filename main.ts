@@ -1,112 +1,62 @@
-import { App, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Plugin, PluginManifest, MarkdownView  } from "obsidian";
 
-interface MyPluginSettings {
-	mySetting: string;
-}
+const excludeLangs = [ 
+    "todoist"
+];
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
-}
+export default class CMSyntaxHighlightPlugin extends Plugin {
+    constructor(app: App, pluginManifest: PluginManifest) {
+        super(app, pluginManifest);
+    }
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+    async onload() {
+        this.registerInterval(
+            window.setInterval(this.injectButtons.bind(this), 1000)
+        );
+    }
 
-	async onload() {
-		console.log('loading plugin');
+    injectButtons() {
+        this.addCopyButtons(navigator.clipboard);
+    }
 
-		await this.loadSettings();
+    addCopyButtons(clipboard:any) {
+        document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+            var pre = codeBlock.parentNode;
 
-		this.addRibbonIcon('dice', 'Sample Plugin', () => {
-			new Notice('This is a notice!');
-		});
+            // check for excluded langs
+            for ( let lang of excludeLangs ){
+                if (pre.classList.contains( `language-${lang}` ))
+                return;
+            }
 
-		this.addStatusBarItem().setText('Status Bar Text');
+            // Dont add more than once
+            if (pre.parentNode.classList.contains('has-copy-button')) {
+                return;
+            }
 
-		this.addCommand({
-			id: 'open-sample-modal',
-			name: 'Open Sample Modal',
-			// callback: () => {
-			// 	console.log('Simple Callback');
-			// },
-			checkCallback: (checking: boolean) => {
-				let leaf = this.app.workspace.activeLeaf;
-				if (leaf) {
-					if (!checking) {
-						new SampleModal(this.app).open();
-					}
-					return true;
-				}
-				return false;
-			}
-		});
+            pre.parentNode.classList.add('has-copy-button');
 
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+            var button = document.createElement('button');
+            button.className = 'copy-code-button';
+            button.type = 'button';
+            button.innerText = 'Copy';
 
-		this.registerCodeMirror((cm: CodeMirror.Editor) => {
-			console.log('codemirror', cm);
-		});
+            button.addEventListener('click', function () {
+                clipboard.writeText(codeBlock.innerText.trim()).then(function () {
+                    //Chrome doesn't seem to blur automatically, leaving the button in a focused state.
+                    button.blur();
 
-		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
-			console.log('click', evt);
-		});
+                    button.innerText = 'Copied';
+                    setTimeout(function () {
+                        button.innerText = 'Copy';
+                    }, 2000);
 
-		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
-	}
+                }, function (error) {
+                    button.innerText = 'Error';
+                });
+            });
 
-	onunload() {
-		console.log('unloading plugin');
-	}
-
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
-
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
-}
-
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
-
-	onOpen() {
-		let {contentEl} = this;
-		contentEl.setText('Woah!');
-	}
-
-	onClose() {
-		let {contentEl} = this;
-		contentEl.empty();
-	}
-}
-
-class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
-
-	constructor(app: App, plugin: MyPlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		let {containerEl} = this;
-
-		containerEl.empty();
-
-		containerEl.createEl('h2', {text: 'Settings for my awesome plugin.'});
-
-		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue('')
-				.onChange(async (value) => {
-					console.log('Secret: ' + value);
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
-				}));
-	}
+            pre.appendChild(button);
+        });
+    }
 }
