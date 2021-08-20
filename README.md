@@ -5,6 +5,7 @@ Heavily based on [jdbrice/obsidian-code-block-copy](https://github.com/jdbrice/o
 
 * Redundant resources have been removed.
 * Code has been cleaned up.
+* UI text has been  fixed.
 * Code stumps are being trimmed for whitespace (no ending linebreaks).
 
 ## Development
