@@ -1,6 +1,6 @@
 import { App, Plugin, PluginManifest, MarkdownView  } from "obsidian";
 
-const excludeLangs = [ 
+const excludeLangs = [
     "todoist"
 ];
 
