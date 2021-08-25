@@ -1,7 +1,7 @@
 {
   "name": "obsidian-code-copy",
-  "version": "1.0.0",
-  "description": "Easily copy code block from Obsidian",
+  "version": "1.0.1",
+  "description": "Easily copy code block contents from Obsidian",
   "main": "main.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",

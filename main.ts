@@ -30,14 +30,14 @@ export default class CMSyntaxHighlightPlugin extends Plugin {
             }
 
             // Dont add more than once
-            if (pre.parentNode.classList.contains('has-copy-button')) {
+            if (pre.parentNode.classList.contains('has-code-copy-button')) {
                 return;
             }
 
-            pre.parentNode.classList.add('has-copy-button');
+            pre.parentNode.classList.add('has-code-copy-button');
 
             var button = document.createElement('button');
-            button.className = 'copy-code-button';
+            button.className = 'code-copy-button';
             button.type = 'button';
             button.innerText = 'Copy';
 
