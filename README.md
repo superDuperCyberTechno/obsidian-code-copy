@@ -9,4 +9,4 @@ Heavily based on [jdbrice/obsidian-code-block-copy](https://github.com/jdbrice/o
 * Code stumps are being trimmed for whitespace (no ending linebreaks so you don't potentially execute on paste).
 
 ## Development
-Copy the repo, run `npm i`, tweak the source, `npm run build` to compile.
+Copy the repo, run `npm i`, tweak the source, `npm run build` to compile. Pull requests are welcome.
