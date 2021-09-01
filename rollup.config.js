@@ -1,8 +1,9 @@
 import typescript from '@rollup/plugin-typescript';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import scss from 'rollup-plugin-scss';
 
-const isProd = (process.env.BUILD === 'production');
+const isProd = process.env.BUILD === 'production';
 
 const banner = 
 `/*
@@ -26,5 +27,6 @@ export default {
     typescript(),
     nodeResolve({browser: true}),
     commonjs(),
+    scss({output: 'styles.css'}),
   ]
 };
