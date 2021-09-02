@@ -7,20 +7,20 @@
   right: 0;
 
   svg.copy path {
-    fill: var(--interactive-normal);
+    fill: var(--text-faint);
+  }
+
+  svg.copy-success path {
+    fill: var(--interactive-success);
   }
 
   &:hover,
   &:active {
     cursor: pointer;
     svg path {
-      fill: var(--interactive-accent-hover);
+      fill: var(--text-accent-hover);
       transition: all ease 0.3s;
     }
-  }
-
-  svg.copy-success path {
-    fill: var(--interactive-success);
   }
 
   &:focus {
