@@ -1,5 +1,5 @@
 import { App, Plugin, PluginManifest } from "obsidian";
-import './styles.scss';
+import "./styles.scss";
 
 const excludeLangs = ["todoist"];
 
@@ -53,7 +53,12 @@ export default class CMSyntaxHighlightPlugin extends Plugin {
         button.innerHTML = svgCopy;
 
         button.addEventListener("click", function () {
-          clipboard.writeText(codeBlock.innerText.trim()).then(
+          // get the code snippet
+          var copiedText = codeBlock.innerText;
+          // remove the last trailing character (which is a newline)
+          copiedText = copiedText.substring(0, copiedText.length - 1);
+          // write to clipboard
+          clipboard.writeText(copiedText).then(
             () => {
               /* Chrome doesn't seem to blur automatically,
                  leaving the button in a focused state. */
