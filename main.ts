@@ -23,13 +23,13 @@ export default class CMSyntaxHighlightPlugin extends Plugin {
         document.querySelectorAll('pre > code').forEach(function (codeBlock) {
             var pre = codeBlock.parentNode;
 
-            // check for excluded langs
+            //check for excluded langs
             for ( let lang of excludeLangs ){
                 if (pre.classList.contains( `language-${lang}` ))
                 return;
             }
 
-            // Dont add more than once
+            //dont add more than once
             if (pre.parentNode.classList.contains('has-code-copy-button')) {
                 return;
             }
@@ -42,7 +42,12 @@ export default class CMSyntaxHighlightPlugin extends Plugin {
             button.innerText = 'Copy';
 
             button.addEventListener('click', function () {
-                clipboard.writeText(codeBlock.innerText.trim()).then(function () {
+                //get the code snippet
+                var copied_text = codeBlock.innerText;
+                //remove the last trailing character (which is a newline)
+                copied_text = copied_text.substring(0, copied_text.length - 1);
+                //write to clipboard
+                clipboard.writeText(copied_text).then(function () {
                     //Chrome doesn't seem to blur automatically, leaving the button in a focused state.
                     button.blur();
 

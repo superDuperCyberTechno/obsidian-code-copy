@@ -6,7 +6,7 @@ Heavily based on [jdbrice/obsidian-code-block-copy](https://github.com/jdbrice/o
 * Redundant resources have been removed.
 * Code has been cleaned up.
 * UX has been updated.
-* Code stumps are being trimmed for whitespace (no ending linebreaks so you don't potentially execute on paste).
+* Last trailing character is removed (always a newline in code blocks, prevents accidental code execution on paste).
 
 ## Development
 Copy the repo, run `npm i`, tweak the source, `npm run build` to compile. Pull requests are welcome.
