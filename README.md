@@ -9,4 +9,4 @@ Heavily based on [jdbrice/obsidian-code-block-copy](https://github.com/jdbrice/o
 * Last trailing character is removed (always a newline in code blocks, prevents accidental code execution on paste).
 
 ## Development
-Copy the repo, run `npm i`, tweak the source, `npm run build` to compile. Pull requests are welcome.
+Copy the repo, run `npm i`, tweak the source, `npm run build` to compile into the _build_ folder. Pull requests are welcome.
