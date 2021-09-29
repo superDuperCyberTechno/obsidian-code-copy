@@ -1,0 +1,31 @@
+.code-copy-button {
+  display: none;
+  margin: 0 0 0 auto;
+  padding: 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.code-copy-button svg.copy path {
+  fill: var(--text-faint);
+}
+.code-copy-button svg.copy-success path {
+  fill: var(--interactive-success);
+}
+.code-copy-button:hover, .code-copy-button:active {
+  cursor: pointer;
+}
+.code-copy-button:hover svg path, .code-copy-button:active svg path {
+  fill: var(--text-accent-hover);
+  transition: all ease 0.3s;
+}
+.code-copy-button:focus {
+  outline: 0;
+}
+
+.has-code-copy-button pre {
+  position: relative;
+}
+.has-code-copy-button pre:hover .code-copy-button {
+  display: block;
+}
