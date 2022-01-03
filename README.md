@@ -1,4 +1,6 @@
 # Obsidian Code Copy
+### This functionality is now built into Obsidian itself so this repo is considered out-of-date.
+
 Plugin for [Obsidian](https://obsidian.md). Adds a button to code blocks to copy the code within. Trims whitespaces.
 
 Heavily based on [jdbrice/obsidian-code-block-copy](https://github.com/jdbrice/obsidian-code-block-copy). A few enhancements has been made though:
